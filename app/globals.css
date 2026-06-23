@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #f7f3ea;
+  color: #171614;
+  font-family: "Iowan Old Style", "Palatino Linotype", "Noto Serif SC", "Songti SC", STSong, serif;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: #d8d0c1;
+}
+
+.serif-cn {
+  font-family: "Noto Serif SC", "Songti SC", STSong, "Iowan Old Style", serif;
+}
+
+.journal-rule {
+  border-color: #d8d0c1;
+}
+
+.article-body {
+  font-size: 1.125rem;
+  line-height: 1.9;
+}
+
+.article-body:lang(zh) {
+  line-height: 2.05;
+  letter-spacing: 0;
+}
+
+.article-body p,
+.article-body ul,
+.article-body ol,
+.article-body blockquote {
+  margin: 1.35rem 0;
+}
+
+.article-body h2 {
+  font-size: 1.35rem;
+  line-height: 1.35;
+  margin: 2.8rem 0 1rem;
+  font-weight: 600;
+}
+
+.article-body h3 {
+  font-size: 1.08rem;
+  line-height: 1.4;
+  margin: 2rem 0 0.75rem;
+  font-weight: 600;
+}
+
+.article-body a {
+  color: #7a2538;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+}
+
+.article-body blockquote {
+  border-left: 1px solid #7a2538;
+  color: #3e3a34;
+  padding-left: 1.25rem;
+  font-style: italic;
+}
+
+.article-body hr {
+  border: 0;
+  border-top: 1px solid #d8d0c1;
+  margin: 2.5rem 0;
+}
+
+.article-body sup {
+  font-size: 0.7em;
+}
