@@ -17,6 +17,7 @@ export type Article = {
   issue: string;
   language: Language;
   tags: string[];
+  order?: number;
   bio: string;
   summary: string;
   featured: boolean;
@@ -38,7 +39,7 @@ export type Issue = {
   body: string;
 };
 
-type FrontmatterValue = string | string[] | boolean | undefined;
+type FrontmatterValue = string | string[] | boolean | number | undefined;
 
 function readMdxFiles(directory: string) {
   if (!fs.existsSync(directory)) {
@@ -75,6 +76,18 @@ function requireString(
 function optionalString(data: Record<string, FrontmatterValue>, key: string) {
   const value = data[key];
   return typeof value === "string" && value.length > 0 ? value : undefined;
+}
+
+function optionalNumber(data: Record<string, FrontmatterValue>, key: string) {
+  const value = data[key];
+  if (typeof value === "number") {
+    return value;
+  }
+  if (typeof value === "string" && value.trim().length > 0) {
+    const parsed = Number(value);
+    return Number.isFinite(parsed) ? parsed : undefined;
+  }
+  return undefined;
 }
 
 function normalizeTags(value: FrontmatterValue) {
@@ -121,6 +134,7 @@ export function getAllArticles(): Article[] {
         issue: requireString(data, "issue", slug),
         language,
         tags: normalizeTags(data.tags),
+        order: optionalNumber(data, "order"),
         bio: requireString(data, "bio", slug),
         summary: requireString(data, "summary", slug),
         featured: data.featured === true,
@@ -186,7 +200,9 @@ export function getCurrentIssue() {
 }
 
 export function getArticlesByIssue(issueSlug: string) {
-  return getAllArticles().filter((article) => article.issue === issueSlug);
+  return getAllArticles()
+    .filter((article) => article.issue === issueSlug)
+    .sort((a, b) => (a.order ?? 999) - (b.order ?? 999));
 }
 
 export function formatDate(date: string) {

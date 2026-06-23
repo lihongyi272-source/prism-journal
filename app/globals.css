@@ -84,6 +84,13 @@ body {
   margin: 2.5rem 0;
 }
 
+.article-body img {
+  width: 100%;
+  height: auto;
+  border: 1px solid #d8d0c1;
+  margin: 1.75rem 0;
+}
+
 .article-body sup {
   font-size: 0.7em;
 }
